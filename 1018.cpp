@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 char arr[51][51];
 string b = "BWBWBWBW";
