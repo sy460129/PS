@@ -21,7 +21,6 @@ int main(){
     }
     while(!q.empty()){
         auto it=s.lower_bound(q.top().second);
-        cout << q.top().second << " " << *it << "\n";
         if(it!=s.end()){
             s.erase(it);
             ans+=q.top().first;
