@@ -24,7 +24,7 @@ int main() {
 		else if(s[i]=='P' || s[i]=='Q' || s[i]=='R' || s[i]=='S') {
 			count+=7;
 		}
-		else if (s[i] == 'T' || s[i] == 'U' || s[i] == 'V') {
+		else if (s[i]=='T' || s[i]=='U' || s[i]=='V') {
 			count+=8;
 		}
 		else if (s[i]= 'W' || s[i]=='X' || s[i]=='Y' || s[i]=='Z') {
