@@ -32,11 +32,7 @@ int main(){
 			}
 		}
 	}
-	if(round(t/n) == 0){
-		cout << 0 << "\n";
-	}
-	else{
-		cout << round(t/n) << "\n";
-	}
+	if(round(t/n) == 0) cout << 0 << "\n";
+	else cout << round(t/n) << "\n";
 	cout << arr[n/2] << "\n" << ans-4000 << "\n" << ma-mi;
 }
