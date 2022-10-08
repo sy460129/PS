@@ -21,9 +21,6 @@ void merge(string s, string c){
         m[s].second+=m[c].second;
         m[c].second=m[s].second;
     }
-    else{
-        m[s].second>m[c].second ? m[c].second=m[s].second : m[s].second=m[c].second;
-    }
     cout << m[s].second << "\n";
 }
 int main(){
