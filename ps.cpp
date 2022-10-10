@@ -1,47 +1,43 @@
 #include <iostream>
-#include <stack>
+#include <vector>
 using namespace std;
-using ll=long long;
-ll dp[200001];
-ll arr[200001];
-ll brr[200001];
-stack<ll>st;
+int t, n, k, cnt;
+string s;
+vector<int>v;
+bool check, c;
+void dfs(int n){
+	if(n==v.size()){
+		for(int i=0; i<s.length(); i++){
+			if(s[i]=='1') cnt++;
+			else {
+				if(cnt==k){
+					if(!check) check=true;
+					else {
+						c=true;
+					}
+				} 
+				cnt=0;
+			}
+		}
+	}
+	for(int i=n+1; i<v.size(); i++){
+		s[v[i]]='1';
+		dfs(n+1);
+		s[v[i]]='0';
+	}
+}
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(0); cout.tie(0);
-    ll n; cin >> n;
-    for(int i=1; i<=n; i++){
-        cin >> dp[i];
-    }
-    if(n==1){
-        cout << 1;
-        return 0;
-    }
-    arr[n]=dp[n];
-    for(int i=n-1; i>=1; i--){
-       arr[i]=max(arr[i+1]-1, dp[i+1]);
-    }
-    brr[1]=dp[1];
-    for(int i=2; i<=n; i++){
-       brr[i]=max(brr[i-1]-1, dp[i-1]);
-    }
-    for(int i=n; i>=1; i--){
-        ll t;
-        if(dp[i]>brr[i]) {
-            t=dp[i]+i-1;
-            if(t>arr[i]) st.push(i);
-        }
-        else if(dp[i]>arr[i]){
-            t=dp[i]+n-i+1;
-            if(t>brr[i]) st.push(i);
-        }
-    }
-    if(st.empty()){
-        cout << -1;
-        return 0;
-    }
-    while(!st.empty()){
-        cout << st.top() << " ";
-        st.pop();
-    }
+	cin >> t;
+	while(t--){
+		v.clear();
+		check=false, c=false;
+		cnt=0;
+		cin >> n >> k >> s;
+		for(int i=0; i<s.length(); i++){
+			if(s[i]=='?') v.push_back(i);
+		}
+		dfs(0);
+		if(c || !check) cout << "No\n";
+		else cout << "Yes\n";
+	}
 }
