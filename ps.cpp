@@ -1,18 +1,18 @@
 #include <iostream>
 using namespace std;
-bool dp[200002];
+using ll=long long;
+ll ask(ll a, ll b){
+	cout << "? " << a << " " << b << "\n";
+	ll x;
+	cin >> x;
+	return x;
+}
 int main(){
-	int t, n; cin >> t;
-	while(t--){
-		cin >> n;
-		int* arr=new int[n+1];
-		dp[0]=true;
-		for(int i=1; i<=n; i++) cin >> arr[i];
-		for(int i=1; i<=n; i++){
-			if(i+arr[i]<=n && dp[i-1]) dp[i+arr[i]]=true;
-			if(i-arr[i]>=1 && dp[i-arr[i]-1]) dp[i]=true;
-		}
-		dp[n] ? cout << "YES\n" : cout << "NO\n";
-		fill(dp, dp+n+1, false); 
+	int x;
+	for(int i=2; i<=26; i++){
+		ll x=ask(1, i);
+		ll y=ask(i, 1);
+		if(x==-1) cout << "! " << i-1 << "\n";
+		if(x!=y) cout << "! " << x+y << "\n";
 	}
 }
