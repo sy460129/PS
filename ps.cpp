@@ -1,18 +1,26 @@
 #include <iostream>
 using namespace std;
-using ll=long long;
-ll ask(ll a, ll b){
-	cout << "? " << a << " " << b << "\n";
-	ll x;
+int arr[100001];
+int ask(int a){
+	int x;
+	cout << "? " << a << "\n";
 	cin >> x;
+	arr[a]=x;
 	return x;
 }
 int main(){
-	int x;
-	for(int i=2; i<=26; i++){
-		ll x=ask(1, i);
-		ll y=ask(i, 1);
-		if(x==-1) cout << "! " << i-1 << "\n";
-		if(x!=y) cout << "! " << x+y << "\n";
+	int n; cin >> n;
+	int f=1, e=n;
+	arr[0]=n+1, arr[n+1]=n+1;
+	while(f<e){
+		int m=(f+e)/2;
+		ask(m);
+		ask(m+1);
+		if(arr[m]<arr[m+1]){
+			e=m;
+		}
+		else f=m+1;
 	}
+	cout << "! " << e;
+	cout.flush();
 }
