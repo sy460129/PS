@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
+#define rep(i, a, b) for(int i=a; i<b; i++)
 using namespace std;
 bool check[200002];
 int arr[200002];
 int main(){
     int n, x, y, t=-1; cin >> n;
-    for(int i=0; i<n; i++){
+    rep(i, 0, n){
         cin >> x;
         if(!check[x]){
             check[x]=true;
@@ -18,5 +19,5 @@ int main(){
         y=x;
     }
     cout << t+1 << "\n";
-    for(int i=0; i<=t; i++) cout << arr[i] << " ";
+    rep(i, 0, t+1) cout << arr[i] << " ";
 }
