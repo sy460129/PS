@@ -1,10 +1,14 @@
 #include <iostream>
+#include <set>
 using namespace std;
+multiset<int>s;
 int main(){
-    int n, t, x, y; cin >> t >> n;
+    int n, k, x; cin >> n >> k;
     while(n--){
-        cin >> x >> y;
-        t-=(x*y);
+        cin >> x;
+        s.insert(x);
     }
-    t ? cout << "No" : cout << "Yes";
+    k--;
+    while(k--) s.erase(--s.end());
+    cout << *(--s.end());
 }
