@@ -1,31 +1,22 @@
 #include <iostream>
-#define rep(i, a, b) for(int i=a; i<b; i++)
+#include <set>
 using namespace std;
-int r, a;
 int main(){
-    rep(i, 0, 3){
-        rep(j, 0, 4){
-            cin >> a;
-            r+=a;
+    ios_base::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
+    set<int>s;
+    int m, n, l, x, y, cnt=0;
+    cin >> m >> n >> l;
+    while(m--){
+        cin >> x;
+        s.insert(x);
+    }
+    while(n--){
+        cin >> x >> y;
+        if(y<=l) {
+            auto it=s.lower_bound(x);
+            if(abs((*it)-x)+y<=l || (it!=s.begin() && abs(x-(*(--it)))+y<=l)) cnt++;
         }
-        switch(r){
-			case 3:
-				cout << "A";
-				break;
-			case 2:
-				cout << "B";
-				break;
-			case 1:
-				cout << "C";
-				break;
-			case 0:
-				cout << "D";
-				break;
-			default:
-				cout << "E";
-				break;
-		}
-		cout << "\n";
-		r=0;
-	}
+    }
+    cout << cnt;
 }
