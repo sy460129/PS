@@ -18,10 +18,10 @@ int main(){
 			case 1:
 				cout << "C";
 				break;
-			case 4:
+			case 0:
 				cout << "D";
 				break;
-			case 0:
+			default:
 				cout << "E";
 				break;
 		}
