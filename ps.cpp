@@ -17,6 +17,9 @@ int main(){
         cin >> x >> y;
         if(y<=l) {
             auto it=lower_bound(v.begin(), v.end(), x)-v.begin();
+            if(it==v.size()){
+                if(x-v[it-1]+y<=l) cnt++;
+            }
             if(abs(x-v[it])+y<=l) cnt++;
             else if(it!=0 && x-v[it-1]+y<=l) cnt++;
         }
