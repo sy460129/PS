@@ -13,10 +13,6 @@ void merge(int x, int y){
         x>y ? p[x]=y, dp[y]+=dp[x] : p[y]=x, dp[x]+=dp[y];
     }
 }
-int f(int x){
-    x=find(x);
-    return dp[x];
-}
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
@@ -34,7 +30,7 @@ int main(){
         }
         else {
             cin >> x;
-            cout << f(x) << "\n";
+            cout << dp[x] << "\n";
         }
     }
 }
