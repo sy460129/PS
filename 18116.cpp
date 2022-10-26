@@ -13,13 +13,17 @@ void merge(int x, int y){
         x>y ? p[x]=y, dp[y]+=dp[x] : p[y]=x, dp[x]+=dp[y];
     }
 }
+int f(int x){
+    x=find(x);
+    return dp[x];
+}
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
     char c;
     int n, x, y;
     cin >> n;
-    for(int i=1; i<=1000001; i++){
+    for(int i=1; i<=100000; i++){
         p[i]=i, dp[i]=1;
     }
     while(n--){
@@ -30,7 +34,7 @@ int main(){
         }
         else {
             cin >> x;
-            cout << dp[x] << "\n";
+            cout << f(x) << "\n";
         }
     }
 }
