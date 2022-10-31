@@ -1,97 +1,47 @@
 #include <iostream>
 #include <queue>
 #include <tuple>
+#include <set>
 using namespace std;
-bool visit[201];
+using t = tuple<int, int, int>;
+int a, b, c, ss;
 bool check[201][201][201];
-queue<tuple<int,int,int>>qu;
-int a, b, c;
-void bfs(){
-    while(!qu.empty()){
-        auto cur=qu.front(); qu.pop();
-        int x=get<0>(cur);
-        int y=get<1>(cur);
-        int z=get<2>(cur);
-        int p=x, q=y, r=z;
-        if(r>=(a-p)){
-            r-=(a-p);
-            p=a;
-            if(!check[p][q][r]){
-                check[p][q][r]=true;
-                qu.push({p,q,r});
-                visit[r]=true;
-            }
-            if(r>=(b-q)){
-                r-=(b-q);
-                q=b;
-                if(!check[p][q][r]){
-                    check[p][q][r]=true;
-                    qu.push({p,q,r});
-                    visit[r]=true;
-                }
-            }
-            else{
-                q+=r;
-                r=0;
-                if(!check[p][q][r]){
-                    check[p][q][r]=true;
-                    qu.push({p,q,r});
-                    visit[r]=true;
-                }
-            }
+set<int>ans;
+queue<t>q;
+void bfs() {
+    while (!q.empty()) {
+        auto cur = q.front(); q.pop();
+        int x = get<0>(cur);
+        int y = get<1>(cur);
+        int z = get<2>(cur);
+        if(check[x][y][z]) continue;
+        check[x][y][z]=true;
+        if(x==0) ans.insert(z);
+        if(z!=0){
+            if(x+z<=a) q.push({z+x,y,0});
+            else q.push({a,y,z+x-a});
+            if(y+z<=b) q.push({x,z+y,0});
+            else q.push({x,b,z+y-b});
         }
-        else{
-            p+=r;
-            r=0;
-            if(!check[p][q][r]){
-                check[p][q][r]=true;
-                qu.push({p,q,r});
-                visit[r]=true;
-            }
+        if(x!=0){
+            if(x+z<=c) q.push({0,y,z+x});
+            else q.push({x+z-c,y,c});
+            if(x+y<=b) q.push({0,x+y,z});
+            else q.push({x+y-b,b,z});
         }
-        int p=x, q=y, r=z;
-        if(r>=(b-q)){
-            r-=(b-q);
-            q=b;
-            if(!check[p][q][r]){
-                check[p][q][r]=true;
-                qu.push({p,q,r});
-                visit[r]=true;
-            }
-            if(r>=(a-p)){
-                r-=(a-p);
-                p=a;
-                if(!check[p][q][r]){
-                    check[p][q][r]=true;
-                    qu.push({p,q,r});
-                    visit[r]=true;
-                }
-            }
-            else{
-                p+=r;
-                r=0;
-                if(!check[p][q][r]){
-                    check[p][q][r]=true;
-                    qu.push({p,q,r});
-                    visit[r]=true;
-                }
-            }
+        if(y!=0){
+            if(y+z<=c) q.push({x,0,z+y});
+            else q.push({x,y+z-c,c});
+            if(x+y<=a) q.push({x+y,0,z});
+            else q.push({a,x+y-a,z});
         }
-        else{
-            q+=r;
-            r=0;
-            if(!check[p][q][r]){
-                check[p][q][r]=true;
-                qu.push({p,q,r});
-                visit[r]=true;
-            }
-        }
-        
     }
 }
-int main(){
+int main() {
     cin >> a >> b >> c;
-    qu.push({0,0,c});
-    check[0][0][c]=true;
+    q.push({ 0,0,c });
     bfs();
+    for (auto it = ans.begin(); it != ans.end(); it++) {
+        cout << *it << " ";
+    }
 }
