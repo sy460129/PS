@@ -11,7 +11,7 @@ int main(){
 		m=(f+e)/2;
 		if(m*m>n) e=m-1;
 		else f=m+1;
-		if(m*m>=n && (m-1)*(m-1)>n) break;
+		if(m*m>=n && (m-1)*(m-1)<n) break;
 	}
 	cout << m;
 }
