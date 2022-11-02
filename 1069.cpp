@@ -20,7 +20,7 @@ int main() {
     ans=res;
     if(p>=res){
         if(i==1) ans=min(ans,min(t*2, t+p-res));
-        else ans=min((i-1)*t+p-res, min(i*t, ans));
+        else ans=min(i*t, ans);
     }
     if(p<res) ans=min(ans, min(i*t+res-p, t*(i+1)));
     cout << fixed << setprecision(11) << ans;
