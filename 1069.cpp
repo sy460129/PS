@@ -6,7 +6,7 @@ int main() {
     double x, y, d, t, ans=2147483647, res, p=0;
     int i=1;
     cin >> x >> y >> d >> t;
-    res=sqrt(x * x + y * y);
+    res=sqrt(x*x+y*y);
     p=d;
     while(1){
         if(abs(p-res)>=ans){

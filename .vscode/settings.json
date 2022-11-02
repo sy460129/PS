@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "cstdlib": "cpp",
-        "ios": "cpp",
-        "utility": "cpp"
-    }
-}
