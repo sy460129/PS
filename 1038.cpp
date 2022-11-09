@@ -15,13 +15,13 @@ int main() {
     }
     n-=10;
     ll t = 20;
-    while(n!=1){
+    while(n!=0){
         string s=to_string(t);
         c=true;
         for(int i=1; i<s.length(); i++) {
             if(s[i-1]-'0'<=s[i]-'0') {
                 t+=pow(10, s.length()-i);
-                t-=((s[i]-'0')*pow(10, s.length()-i-1));
+                t-=((s[i]-'0')* pow(10, s.length()-i-1));
                 c=false;
                 break;
             }
@@ -32,5 +32,5 @@ int main() {
             return 0;
         }
     }
-    cout << t;
+    cout << --t;
 }
