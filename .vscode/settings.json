@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "iostream": "cpp",
-        "cstdlib": "cpp",
-        "deque": "cpp",
-        "queue": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
-}
