@@ -1,43 +1,44 @@
 #include <iostream>
-#include <queue>
-#include <tuple>
+#include <cstring>
 using namespace std;
-using ll=long long;
-using t=tuple<ll,ll, ll>;
-priority_queue<t, vector<t>, greater<t>>q;
-ll arr[10001];
-ll find(ll x){
-    if(x==arr[x]) return x;
-    else return x=find(arr[x]);
-}
-bool merge(ll x, ll y){
-    x=find(arr[x]);
-    y=find(arr[y]);
-    if(x==y) return true;
-    else{
-        x>y ? arr[x]=y : arr[y]=x;
-        return false;
-    }
-}
-ll cnt;
-int main(){
-    int n, m, t, a, b, c, p=0;
-    for(int i=1; i<=10000; i++) arr[i]=i;
-    cin >> n >> m >> t;
-    while(m--){
-        cin >> a >> b >> c;
-        q.push({c,a,b});
-    }
-    while(!q.empty()){
-        auto cur=q.top(); q.pop();
-        ll x=get<0>(cur);
-        ll y=get<1>(cur);
-        ll z=get<2>(cur);
-        if(!merge(y, z)){
-            cnt+=x;
-            p++;
-            cnt+=t*(p-1);
+int dp[3001];
+int n, t;
+bool check;
+void str(string s) {
+    string c;
+    int x, y = 0;
+    while (s!="1") {
+        for (int i = 0; i < s.length(); i++) {
+            if (!check && s[i] - '0' == 0) continue;
+            check = true;
+            x = s[i] - '0' + y;
+            if (x % 2 == 0) {
+                y = 0;
+                c += ((x / 2) + '0');
+            }
+            else {
+                y = 10;
+                c += ((x / 2) + '0');
+            }
         }
-    } 
-    cout << cnt;
+        t++;
+        s = c;
+        c.clear();
+        check = false;
+    }
+    t++;
+}
+int main() {
+    string s;
+    cin >> n >> s;
+    for (int i = 2; i <= n; i++) {
+        i % 2 == 0 ? dp[i] = (dp[i - 1] * 2 + 1) % 1000000007 : dp[i] = (dp[i - 1] * 2) % 1000000007;
+    }
+    str(s);
+    if (n % 2 == 0) {
+        t % 2 != 0 ? cout << dp[n] : cout << dp[n] - 1;
+    }
+    else {
+        t % 2 != 0 ? cout << dp[n] : cout << dp[n] + 1;
+    }
 }
