@@ -18,9 +18,7 @@ int main() {
 	int n;
 	string s;
 	cin >> n;
-	for (int i = 0; i < 10; i++) {
-		check[i] = true;
-	}
+	for (int i = 0; i < 10; i++) check[i] = true;
 	while (n--) {
 		cin >> s;
 		for (int i = 0; i < s.length(); i++) {
@@ -29,20 +27,11 @@ int main() {
 				while (check[s[i] - '0']) {
 					d.push_back(s[i]);
 					i++;
-					if (i >= s.length()) {
-						break;
-					}
+					if (i >= s.length()) break;
 				}
-				while (1) {
-					if (d.empty()) {
-						break;
-					}
-					if (d.size() != 1 && d.front() == '0') {
-						d.pop_front();
-					}
-					else {
-						break;
-					}
+				while (!d.empty()) {
+					if (d.size() != 1 && d.front() == '0') d.pop_front();
+					else break;
 				}
 				while (!d.empty()) {
 					c += d.front();
