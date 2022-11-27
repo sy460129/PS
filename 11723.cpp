@@ -20,11 +20,7 @@ int main(){
         }
         else{
             if(s[0]=='e') x=0;
-            else{
-                for(int i=1; i<=20; i++){
-                    x=(1>>21)-1;
-                }
-            }
+            else x=(1<<21)-1;
         }
     }
 }
