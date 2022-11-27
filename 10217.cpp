@@ -3,7 +3,7 @@
 #include <queue>
 #define INF 987654321
 using namespace std;
-using ll=long long;
+using ll=int;
 using p=pair<pair<ll,ll>,ll>;
 ll dist[102][10002];
 ll t, n, m, k, u, v, c, d;
@@ -23,15 +23,14 @@ int main(){
         }
         q.push({{0,1},0});
         while(!q.empty()){
-            ll nc=q.top().first.first, nx=q.top().first.second, nd=q.top().second;
+            ll nd=q.top().first.first, nx=q.top().first.second, nc=q.top().second;
             q.pop();
-            if(dist[nx][nc]<nd) continue;
             for(int i=0; i<vec[nx].size(); i++){
                 ll next=vec[nx][i].first.first, dis=vec[nx][i].first.second, cost=vec[nx][i].second;
                 if(nc+cost>m) continue;
                 if(dist[next][nc+cost]>nd+dis){
                     dist[next][nc+cost]=nd+dis;
-                    q.push({{nc+cost,next},dist[next][nc+cost]});
+                    q.push({{dist[next][nc+cost],next},nc+cost});
                 }
             }
         }
