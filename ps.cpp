@@ -1,26 +1,66 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
-int gcd(int a, int b){
-    return b ? gcd(b, a%b) : a;
-}
-int lcm(int a, int b){
-    return (a*b)/(gcd(a, b));
+string arr[51];
+int n, k, ans, t;
+bool check[26];
+vector<char>v;
+void track(int u, int cnt){
+    if(cnt==k || u==v.size()){
+        int res=0;
+        for(int i=0; i<n; i++){
+            bool c=true;
+            for(int j=0; j<arr[i].length(); j++){
+                int p=(arr[i][j]-'a');
+                if((1<<p)&t) c=true;
+                else{
+                    c=false;
+                    break;
+                }
+            }
+            if(c) res++;
+        }
+        ans=max(ans, res);
+        return;
+    }
+    for(int i=u; i<v.size(); i++){
+        int l=v[i]-'a';
+        if(!check[l]){
+            check[l]=true;
+            t|=(1<<l);
+            track(i+1, cnt+1);
+            check[l]=false;
+            t&=~(1<<l);
+        }
+    }
 }
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
-    int x, y, t, a, b;
-    cin >> t;
-    while(t--){
-        int res=-1;
-        cin >> x >> y >> a >> b;
-        a--, b--;
-        for(int i=a; i<=lcm(x, y); i+=x){
-            if(i%x==a && i%y==b){
-                res=i+1;
-                break;
-            }
+    cin >> n >> k;
+    for(int i=0; i<n; i++){
+        cin >> arr[i];
+        for(int j=0; j<arr[i].size(); j++) {
+            if(arr[i][j]!='a' && arr[i][j]!='n' && arr[i][j]!='t' && arr[i][j]!='i' && arr[i][j]!='c') v.push_back(arr[i][j]);
         }
-        cout << res << "\n";
     }
+    sort(v.begin(), v.end());
+    v.erase(unique(v.begin(), v.end()), v.end());
+    if(k<5){
+        cout << 0;
+        return 0;
+    }
+    t|=(1<<('a'-'a'));
+    t|=(1<<('n'-'a'));
+    t|=(1<<('t'-'a'));
+    t|=(1<<('i'-'a'));
+    t|=(1<<('c'-'a'));
+    check[0]=true;
+    check['n'-'a']=true;
+    check['t'-'a']=true;
+    check['i'-'a']=true;
+    check['c'-'a']=true;
+    track(0, 5);
+    cout << ans;
 }
