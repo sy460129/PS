@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 int main(){
 	int n, x, mi=2147483647, ma=0, ans=0; cin >> n;
