@@ -19,7 +19,7 @@ void track(int t){
 	}
 	for(int i=t; i<c.size(); i++){
 		a.push_back({c[i].first, c[i].second});
-		track(t+1);
+		track(i+1);
 		a.pop_back();
 	}
 }
