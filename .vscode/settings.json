@@ -2,6 +2,9 @@
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "vector": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "queue": "cpp"
     }
 }

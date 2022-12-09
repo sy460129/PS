@@ -1,37 +1,54 @@
 #include <iostream>
-#include <vector>
+#include <queue>
+#include <algorithm>
+#include <map>
 using namespace std;
-int n, m, x, answer=2147483647;
-vector<pair<int,int>>h, c, a;
-bool check[14];
-void track(int t){
-	if(a.size()==m){
-		int ans=0;
-		for(int j=0; j<h.size(); j++){
-			int res=2147483647;
-			for(int i=0; i<a.size(); i++){
-				res=min(res, (abs(h[j].first-a[i].first)+abs(h[j].second-a[i].second)));
-			}
-			ans+=res;
-		}
-		answer=min(ans, answer);
-		return;
-	}
-	for(int i=t; i<c.size(); i++){
-		a.push_back({c[i].first, c[i].second});
-		track(t+1);
-		a.pop_back();
-	}
-}
+queue<string>q;
+map<string, int>m;
 int main(){
-	cin >> n >> m;
-	for(int i=0; i<n; i++){
-		for(int j=0; j<n; j++){
-			cin >> x;
-			if(x==1) h.push_back({i,j});
-			else if(x==2) c.push_back({i,j});
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	string s, c; cin >> s >> c;
+	q.push(c);
+	while(!q.empty()){
+		string x=q.front(); q.pop();
+		if(x[0]==x[x.length()-1]){
+			if(x[0]=='B'){
+				reverse(x.begin(), x.end());
+				x.pop_back();
+				if(x==s){
+					cout << 1;
+					return 0;
+				}
+				if(x.length()>s.length() && !m.count(x)) q.push(x), m[x]++;
+			}
+			else{
+				x.pop_back();
+				if(x==s){
+					cout << 1;
+					return 0;
+				}
+				if(x.length()>s.length() && !m.count(x)) q.push(x), m[x]++;
+			}
+		}
+		else{
+			if(x[0]=='B'){
+				string t=x;
+				reverse(t.begin(), t.end());
+				t.pop_back();
+				if(t==s){
+					cout << 1;
+					return 0;
+				}
+				if(t.length()>s.length() && !m.count(t)) q.push(t), m[t]++;
+				x.pop_back();
+				if(x==s){
+					cout << 1;
+					return 0;
+				}
+				if(x.length()>s.length() && !m.count(x)) q.push(x), m[x]++;
+			}
 		}
 	}
-	track(0);
-	cout << answer;
+	cout << 0;
 }
