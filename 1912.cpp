@@ -1,16 +1,12 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-int main() {
-	int n;
-	cin >> n;
-	int* arr = new int[n];
-	for (int i = 0; i < n; i++) {
-		cin >> arr[i];
+int dp[100001];
+int main(){
+	int n, x, ans=-2147483647; cin >> n;
+	for(int i=0; i<n; i++){
+		cin >> x;
+		i==0 ? dp[i]=x : dp[i]=max(x, dp[i-1]+x);
+		ans=max(ans, dp[i]);
 	}
-	int sum = arr[0];
-	for (int i = 1; i < n; i++) {
-		arr[i] = max(arr[i], arr[i] + arr[i - 1]);
-		sum = max(sum, arr[i]);
-	}
-	cout << sum << "\n";
+	cout << ans;
 }
