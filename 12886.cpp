@@ -1,7 +1,7 @@
 #include <iostream>
 #include <queue>
 using namespace std;
-bool arr[501][501];
+bool arr[1501][1501];
 queue<pair<int,int>>q;
 int main(){
 	int a, b, c, n, m, ma, mi, sum; cin >> a >> b >> c;
@@ -29,21 +29,21 @@ int main(){
 		n=min(a, b), m=max(a, b);
 		m-=n, n*=2;
 		mi=min(n, m), ma=max(n, m);
-		if(mi>0 && ma<=500 && !arr[mi][ma]){
+		if(mi>0 && !arr[mi][ma]){
 			q.push({mi, ma});
 			arr[mi][ma]=true;
 		}
 		n=min(a, c), m=max(a, c);
 		m-=n, n*=2;
 		mi=min(n, m), ma=max(n, m);
-		if(mi>0 && ma<=500 && !arr[mi][ma]){
+		if(mi>0 && !arr[mi][ma]){
 			q.push({mi, ma});
 			arr[mi][ma]=true;
 		}
 		n=min(b, c), m=max(b, c);
 		m-=n, n*=2;
 		mi=min(n, m), ma=max(n, m);
-		if(mi>0 && ma<=500 && !arr[mi][ma]){
+		if(mi>0 && !arr[mi][ma]){
 			q.push({mi, ma});
 			arr[mi][ma]=true;
 		}
