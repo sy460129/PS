@@ -1,6 +1,6 @@
 {
     "files.associations": {
-        "utility": "cpp",
-        "queue": "cpp"
+        "iostream": "cpp",
+        "utility": "cpp"
     }
 }
