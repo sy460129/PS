@@ -1,47 +1,21 @@
 #include <iostream>
-#include <queue>
 using namespace std;
-int dx[]={1,-1,0,0,1,-1,1,-1,0};
-int dy[]={-1,1,1,-1,0,0,1,-1,0};
-char arr[8][8];
-bool visit[8][8];
-queue<pair<int,int>>q, q2;
-void bfs(){
-	while(!q.empty()){
-		fill(visit[0], visit[8], 0);
-		while(!q.empty()){
-			int x=q.front().first, y=q.front().second; q.pop();
-			if(x==0 && y==7){
-				cout << 1;
-				exit(0);
-			}
-			if(arr[x][y]=='.'){
-				for(int i=0; i<9; i++){
-					int nx=x+dx[i];
-					int ny=y+dy[i];
-					if(nx<0 || ny<0 || nx>7 || ny>7 || arr[nx][ny]=='#' || visit[nx][ny]) continue;
-					visit[nx][ny]=true;
-					q2.push({nx,ny});
-				}
-			}
-		}
-		for(int i=7; i>=0; i--){
-			for(int j=0; j<8; j++){
-				if(i==0) arr[i][j]='.';
-				else arr[i][j]=arr[i-1][j];
-			}
-		}
-		q=q2;
-		while(!q2.empty()) q2.pop();
-	}
-}
+int arr[1001][3];
+int dp[1001][3];
 int main(){
-	for(int i=0; i<8; i++){
-		for(int j=0; j<8; j++){
-			cin >> arr[i][j];
+	int n; cin >> n;
+	for(int i=0; i<n; i++){
+		cin >> arr[i][0] >> arr[i][1] >> arr[i][2];
+		if(i==0){
+			dp[i][0]=arr[i][0];
+			dp[i][1]=arr[i][1];
+			dp[i][2]=arr[i][2];
+		}
+		else{
+			dp[i][0]=min(dp[i-1][1], dp[i-1][2])+arr[i][0];
+			dp[i][1]=min(dp[i-1][0], dp[i-1][2])+arr[i][1];
+			dp[i][2]=min(dp[i-1][0], dp[i-1][1])+arr[i][2];
 		}
 	}
-	q.push({7,0});
-	bfs();
-	cout << 0;
+	cout << min(dp[n-1][0], min(dp[n-1][1], dp[n-1][2]));
 }
