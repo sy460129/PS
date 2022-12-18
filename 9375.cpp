@@ -1,16 +1,10 @@
 #include <iostream>
 #include <map>
-#include <vector>
-#include <algorithm>
 using namespace std;
-vector<int>vec;
-vector<string>v;
 map<string, int>m;
-int n, t, cnt, x;
+int n, t, cnt;
 bool check[31];
 int main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0); cout.tie(0);
 	cin >> t;
 	string s, c;
 	while(t--){
@@ -20,9 +14,7 @@ int main(){
 			cin >> s >> c;
 			m[c]++;
 		}
-		for(auto e : m){
-			cnt*=(e.second+1);
-		}
+		for(auto e : m) cnt*=(e.second+1);
 		m.clear();
 		cout << cnt-1 << "\n";
 	}
