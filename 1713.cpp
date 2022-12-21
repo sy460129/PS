@@ -9,10 +9,10 @@ int main(){
     int n, m, x, y, cnt=0; cin >> n >> m;
     for(int i=0; i<m; i++){
         cin >> x;
-        if(arr[x]==0) cnt++;
-        if(cnt>n){
+        if(arr[x]==0) v.push_back(x), cnt++;
+        if(v.size()>n){
             int k=1001;
-            for(int i=0; i<v.size(); i++){
+            for(int i=0; i<v.size()-1; i++){
                 if(k>arr[v[i]] && check[v[i]]){
                     k=arr[v[i]];
                     y=v[i];
@@ -25,7 +25,6 @@ int main(){
             cnt--;
         }
         arr[x]++;
-        if(!check[x]) v.push_back(x);
         check[x]=true;
     }
     for(int i=1; i<101; i++){
