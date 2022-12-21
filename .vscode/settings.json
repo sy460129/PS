@@ -11,6 +11,10 @@
         "stack": "cpp",
         "type_traits": "cpp",
         "xstring": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "atomic": "cpp",
+        "ios": "cpp",
+        "system_error": "cpp",
+        "xiosbase": "cpp"
     }
 }

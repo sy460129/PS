@@ -15,7 +15,7 @@ int main(){
         q.push({y,x});
         w+=x;
     }
-    while(!q.empty()){
+    while(!q.empty() && w>=m){
         x=q.top().first, y=q.top().second; q.pop();
         p=x;
         while(!q.empty() && q.top().first==x){
@@ -23,17 +23,15 @@ int main(){
             v.push_back({q.top().first, q.top().second});
             q.pop();
         }
-        while(!v.empty()){
+        while(!v.empty() && w>=m){
             ans=min((ll)p, ans);
             p-=v.back().first;
             w-=v.back().second;
-            if(w<m) break;
             v.pop_back();
         }
         if(w<m) break;
         ans=min((ll)p, ans);
         w-=y;
-        if(w<m) break;
         v.clear();
     }
     ans==MAX ? cout << -1 : cout << ans;
