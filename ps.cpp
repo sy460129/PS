@@ -1,35 +1,31 @@
 #include <iostream>
+#include <map>
 #include <vector>
-#include <queue>
+#define MAX 999999999999999999
 using namespace std;
-priority_queue<pair<int,int>>q;
-vector<int>v;
-bool flag;
+bool check1, check2;
 int main(){
-    int n, m, k; cin >> n >> m;
-    for(int i=1; i<=m; i++){
-        cin >> k;
-        q.push({k,i});
-    }
-    while(!q.empty()){
-        int x=q.top().first, y=q.top().second; q.pop();
-        if(!v.empty() && v.back()==y){
-            if(q.empty()){
-                flag=true;
-                break;
-            }
-            int i=q.top().first, j=q.top().second; q.pop();
-            q.push({x,y});
-            if(i!=1) q.push({i-1,j});
-            v.push_back(j);
+    long long i=-1e18, j=1e18, t;
+    int n, ans; cin >> n;
+    char c;
+    for(int k=1; k<=n; k++){
+        cin >> t >> c;
+        if(c=='^') i=max(i, t);
+        else if(c=='v') j=min(j, t);
+        if(i>=j-1 && !check1){
+            check1=true;
+            ans=k;
         }
-        else{
-            v.push_back(y);
-            if(x!=1) q.push({x-1, y});
+        else if((((j==1e18 || i==-1e18) && j-i==1) || j-i==2) && !check1 && !check2){
+            check2=true;
+            ans=k;
         }
     }
-    if(flag) cout << -1;
-    else{
-        for(auto e : v) cout << e << " ";
+    if(check1){
+        cout << "Paradox!\n" << ans;
     }
+    else if(check2){
+        cout << "I got it!\n" << ans;
+    }
+    else cout << "Hmm...";
 }
