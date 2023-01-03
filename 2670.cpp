@@ -11,8 +11,5 @@ int main(){
         else if(dp[i]*dp[i-1]>1 && dp[i-1]>1) dp[i]*=dp[i-1];
         ans=max(ans, dp[i]);
     }
-    for(int i=0; i<n; i++){
-        cout << dp[i] << " ";
-    }
     cout << fixed << setprecision(3) << ans;
 }
