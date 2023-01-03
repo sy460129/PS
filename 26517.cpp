@@ -1,6 +1,4 @@
 #include<iostream>
-#include<queue>
-#include<vector>
 using namespace std;
 int main() {
 	long long x, a, b, c, d; cin >> x >> a >> b >> c >> d;
