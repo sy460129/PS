@@ -1,8 +1,9 @@
 #include <iostream>
 using namespace std;
-pair<int,int>check;
+using ll=long long;
+pair<ll,ll>check;
 int main(){
-    int n, a, pa, b, pb, x, y, ans=0;
+    ll n, a, pa, b, pb, x, y, ans=0;
     cin >> n >> a >> pa >> b >> pb;
     x=n/pa;
     while(x>=0){
