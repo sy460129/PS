@@ -4,6 +4,11 @@
         "vector": "cpp",
         "xstring": "cpp",
         "stack": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "utility": "cpp",
+        "xutility": "cpp",
+        "deque": "cpp",
+        "xlocinfo": "cpp",
+        "xtree": "cpp"
     }
 }
