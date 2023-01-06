@@ -1,74 +1,158 @@
-#include <iostream>
-#include <queue>
-#include <vector>
-#include <tuple>
-#include <algorithm>
-using namespace std;
-int arr[21][21];
-int num[7];
-int n, ans, t, p, now;
-bool c;
-bool visit[21][21];
-int dx[]={-1,0,1,0};
-int dy[]={0,-1,0,1};
-vector<pair<int,int>>v;
-queue<pair<pair<int,int>,pair<int,int>>>q;
-void bfs(){
-	while(!q.empty()){
-		int x=q.front().first.first; // x좌표
-		int y=q.front().first.second; // y좌표
-		int w=q.front().second.first; // 상어 크기
-		int z=q.front().second.second+1; // 이동 횟수
-		while(num[p]==0){
-			p++;
-			if(p>=w) c=true;
+	#include <iostream>
+	using namespace std;
+	int arr[21][21];
+	int n, ans;
+	void dfs(int t, int cnt){
+		int dp[21][21];
+		if(cnt==5) {
+			return;
 		}
-		if(c) break;
-		q.pop();
-		for(int i=0; i<4; i++){
-			int nx=x+dx[i];
-			int ny=y+dy[i];
-			if(nx<0 || ny<0 || nx>n-1 || ny>n-1 || visit[nx][ny] || arr[nx][ny]>w || (now!=0 && now!=z)) continue;
-			if(arr[nx][ny]<w && arr[nx][ny]!=0 && !visit[nx][ny]){
-				v.push_back({nx,ny});
-				now=z;
-				visit[nx][ny]=true;
+		for(int k=0; k<4; k++){
+			if(k==0){
+				memcpy(dp, arr, sizeof(dp));
+				for(int i=0; i<n; i++){
+					int p=0;
+					for(int j=0; j<n; j++){
+						if(arr[i][j]!=0){
+							if(p==0){
+								if(arr[i][p]==0) swap(arr[i][p],arr[i][j]);
+								else if(j!=0){
+									if(arr[i][j]==arr[i][p]) arr[i][p]*=2, arr[i][j]=0, p++;
+									else{
+										if(arr[i][p]!=0) p++;
+										swap(arr[i][p],arr[i][j]);
+									}
+								}
+							} 
+							else {
+								if(arr[i][j]==arr[i][p]) arr[i][p]*=2, arr[i][j]=0, p++;
+								else{
+									if(arr[i][p]!=0) p++;
+									swap(arr[i][p],arr[i][j]);
+								}
+							}
+						}
+					}
+				}
+				dfs(t, cnt+1);
+				for(int i=0; i<n; i++){
+					for(int j=0; j<n; j++){
+						ans=max(ans,arr[i][j]);
+						arr[i][j]=dp[i][j];
+					}
+				}
 			}
-			else{
-				if(v.empty()){
-					q.push({{nx,ny},{w,z}});
-					visit[nx][ny]=true;
+			else if(k==1){
+				memcpy(dp, arr, sizeof(dp));
+				for(int i=0; i<n; i++){
+					int p=n-1;
+					for(int j=n-1; j>=0; j--){
+						if(arr[i][j]!=0){
+							if(p==n-1){
+								if(arr[i][p]==0) swap(arr[i][p],arr[i][j]);
+								else if(j!=n-1){
+									if(arr[i][j]==arr[i][p]) arr[i][p]*=2, arr[i][j]=0, p--;
+									else{
+										if(arr[i][p]!=0) p--;
+										swap(arr[i][p],arr[i][j]);
+									}
+								}
+							}
+							else {
+								if(arr[i][j]==arr[i][p]) arr[i][p]*=2, arr[i][j]=0, p--;
+								else{
+									if(arr[i][p]!=0) p--;
+									swap(arr[i][p],arr[i][j]);
+								}
+							}
+						}
+					}
+				}
+				dfs(t, cnt+1);
+				for(int i=0; i<n; i++){
+					for(int j=0; j<n; j++){
+						ans=max(ans,arr[i][j]);
+						arr[i][j]=dp[i][j];
+					}
+				}
+			}
+			if(k==2){
+				memcpy(dp, arr, sizeof(dp));
+				for(int j=0; j<n; j++){
+					int p=0;
+					for(int i=0; i<n; i++){
+						if(arr[i][j]!=0){
+							if(p==0){
+								if(arr[p][j]==0) swap(arr[p][j],arr[i][j]);
+								else if(i!=0){
+									if(arr[i][j]==arr[p][j]) arr[p][j]*=2, arr[i][j]=0, p++;
+									else{
+										if(arr[p][j]!=0) p++;
+										swap(arr[p][j],arr[i][j]);
+									}
+								}
+							}
+							else {
+								if(arr[i][j]==arr[p][j]) arr[p][j]*=2, arr[i][j]=0, p++;
+								else{
+									if(arr[p][j]!=0) p++;
+									swap(arr[p][j],arr[i][j]);
+								}
+							}
+						}
+					}
+				}
+				dfs(t, cnt+1);
+				for(int i=0; i<n; i++){
+					for(int j=0; j<n; j++){
+						ans=max(ans,arr[i][j]);
+						arr[i][j]=dp[i][j];
+					}
+				}
+			}
+			if(k==3){
+				memcpy(dp, arr, sizeof(dp));
+				for(int j=0; j<n; j++){
+					int p=n-1;
+					for(int i=n-1; i>=0; i--){
+						if(arr[i][j]!=0){
+							if(p==n-1){
+								if(arr[p][j]==0) swap(arr[p][j],arr[i][j]);
+								else if(i!=n-1){
+									if(arr[i][j]==arr[p][j]) arr[p][j]*=2, arr[i][j]=0, p--;
+									else{
+										if(arr[p][j]!=0) p--;
+										swap(arr[p][j],arr[i][j]);
+									}
+								}
+							} 
+							else {
+								if(arr[i][j]==arr[p][j]) arr[p][j]*=2, arr[i][j]=0, p--;
+								else{
+									if(arr[p][j]!=0) p--;
+									swap(arr[p][j],arr[i][j]);
+								}
+							}
+						}
+					}
+				}
+				dfs(t, cnt+1);
+				for(int i=0; i<n; i++){
+					for(int j=0; j<n; j++){
+						ans=max(ans,arr[i][j]);
+						arr[i][j]=dp[i][j];
+					}
 				}
 			}
 		}
-		if(q.empty() && !v.empty()){
-			sort(v.begin(), v.end());
-			int a=v[0].first, b=v[0].second;
-			ans=now, t++;
-			while(!q.empty()) q.pop();
-			num[arr[a][b]]--;
-			arr[a][b]=0;
-			if(t==w) w++, t=0;
-			q.push({{a, b},{w,now}});
-			fill(visit[0], visit[n], false);
-			v.clear();
-			now=0;
-		}
 	}
-}
-int main(){
-	cin >> n;
-	for(int i=0; i<n; i++){
-		for(int j=0; j<n; j++){
-			cin >> arr[i][j];
-			if(arr[i][j]==9) {
-				q.push({{i,j},{2,0}});
-				arr[i][j]=0;
-				visit[i][j]=true;
+	int main(){
+		cin >> n;
+		for(int i=0; i<n; i++){
+			for(int j=0; j<n; j++){
+				cin >> arr[i][j];
 			}
-			else if(arr[i][j]!=0) num[arr[i][j]]++;
 		}
+		for(int i=0; i<4; i++) dfs(i, 0);
+		cout << ans;
 	}
-	bfs();
-	cout << ans;
-}
