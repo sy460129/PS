@@ -9,6 +9,9 @@
         "xutility": "cpp",
         "deque": "cpp",
         "xlocinfo": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "exception": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp"
     }
 }
