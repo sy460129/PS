@@ -14,7 +14,7 @@ string p(string s, string c){
     return ans;
 }
 int main(){
-    string s, c, a; cin >> s >> c;
+    string s, c; cin >> s >> c;
     reverse(s.begin(), s.end());
     reverse(c.begin(), c.end());
     if(s.length()>c.length()){
