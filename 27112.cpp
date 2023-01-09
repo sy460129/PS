@@ -31,7 +31,6 @@ int main(){
 		cnt=0;
 		for(int i=0; i<x; i++){
 			p++;
-			if(p%7==6) p+=2;
 			if(p>x) break;
 			cnt++, ans++;
 			if(cnt==y) break;
