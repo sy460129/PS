@@ -9,9 +9,5 @@ int main(){
 		else if(s[i]=='D' || s[i]=='P') d++;
 	}
 	if(u>(d+1)/2) cout << "U";
-	u=d=0;
-	for(int i=0; i<s.length(); i++){
-		if(s[i]=='D' || s[i]=='P') d++;
-	}
-	if(d>u) cout << "DP";
+	if(d!=0) cout << "DP";
 }
