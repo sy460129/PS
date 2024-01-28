@@ -1,18 +1,18 @@
 #include <iostream>
 using namespace std;
-bool dp[100001];
-long long gcd(int x, int y){
+using ll=long long;
+ll gcd(ll x, ll y){
 	return !y ? x : gcd(y, x%y);
 }
 int main(){
 	int n; cin >> n;
-	long long x;
+	ll x, a1, a2, a3;
 	while(n--){
+		a3=6;
 		cin >> x;
-		if(x%2) cout << x*(x-1)*(x-2) << "\n";
-		else{
-			if(x%3) cout << x*(x-1)*(x-3) << "\n";
-			else cout << (x-1)*(x-2)*(x-3) << "\n";
-		}
+		a1=x*(x-1)*(x-2)/gcd(x*(x-1),(x-2));
+		a2=x*(x-1)*(x-3)/gcd(x*(x-1),(x-3));
+		a3=(x-1)*(x-2)*(x-3)/gcd((x-1)*(x-2),(x-3));
+		cout << max(a1,max(a2,a3)) << "\n";
 	}
 }
