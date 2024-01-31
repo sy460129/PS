@@ -14,26 +14,19 @@ int main(){
 		set<int>s;
 		cin >> n;
 		if(!n) break;
-		int* dp=new int[n];
-		for(int i=0; i<n; i++){
-			cin >> dp[i];
-			s.insert(dp[i]);
-			check[dp[i]]=true;
-		}
+		vector<int>v(n);
+		for(int i=0; i<n; i++) cin >> v[i];
 		for(int i=1; i<101; i++){
 			if(check[i]) continue;
-			x=dp[0];
-			for(int j=1; j<n; j++){
-				x=gcd(x, dp[j]);
-				if(x%i) x=dp[j];
-				if(!check[x]){
-					check[x]=true;
-					s.insert(x);
-				}
+			x=v[0];
+			for(int j=0; j<n; j++){
+				if(x%i) x=v[j];
+				else x=gcd(x, v[j]);
+				s.insert(x);
+				check[x]=true;
 			}
 		}
-		delete[] dp;
-		fill(check, check+101, 0);
 		cout << s.size() << "\n";
+		fill(check, check+101, 0);
 	}
 }
