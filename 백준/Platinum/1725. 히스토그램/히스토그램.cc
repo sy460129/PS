@@ -2,7 +2,7 @@
 #include <vector>
 #include <cmath>
 using namespace std;
-int n, ans, dp[100001], tree[1000001];
+int n, ans, dp[100001], tree[400004];
 int init(int node, int s, int e){
 	if(s==e) return tree[node]=s;
 	int m=(s+e)/2;
@@ -22,7 +22,7 @@ int query(int node, int s, int e, int l, int r){
 }
 void solve(int l, int r){
 	if(r<l) return;
-	int idx=query(1, 0, n-1, l, r);
+	int idx=query(1, 1, n, l, r);
 	ans=max(ans, dp[idx]*(r-l+1));
 	solve(l, idx-1);
 	solve(idx+1, r);
@@ -31,8 +31,8 @@ int main(){
 	ios_base::sync_with_stdio(false);
 	cin.tie(0); cout.tie(0);
 	cin >> n;
-	for(int i=0; i<n; i++) cin >> dp[i];
-	init(1, 0, n-1);
-	solve(0, n-1);
+	for(int i=1; i<=n; i++) cin >> dp[i];
+	init(1, 1, n);
+	solve(1, n);
 	cout << ans;
 }
